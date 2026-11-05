@@ -53,7 +53,7 @@ class PackageIdentityTest(unittest.TestCase):
                 self.assertIn("AppName: mdns-vpn-bridge-rutos-ui\n", metadata)
                 self.assertIn("tlt_name: mDNS VPN Bridge WebUI\n", metadata)
                 self.assertIn("Version: 0.5.0\n", metadata)
-            self.assertIn("Depends: mdns-vpn-bridge (>= 0.2.0)\n", control)
+            self.assertIn("Depends: mdns-vpn-bridge (>= 0.5.0)\n", control)
             self.assertIn(hashlib.sha256(ipk.read_bytes()).hexdigest(), feed)
 
 

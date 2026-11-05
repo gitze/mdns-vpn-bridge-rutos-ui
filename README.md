@@ -10,13 +10,13 @@ Optional Teltonika RutOS WebUI for [mdns-vpn-bridge](https://github.com/gitze/md
 | `mdns-vpn-bridge-rutos-ui` | mDNS VPN Bridge WebUI | Optional configuration/status UI; depends on relay |
 
 - Default delivery: one complete RutOS upload bundle containing relay 0.5.0 and UI 0.5.0. Source repositories and installed package identities stay separate.
-- UI 0.5.0 is a release version bump only; identifiers, API and dependency remain unchanged.
+- UI 0.5.0 adds no runtime features; identifiers/API remain unchanged. The package requires relay >= 0.5.0 so the complete bundle also upgrades older relays.
 
 ## Scope
 
 - This project owns the Vue UI, Lua API adapter, menu/ACL files, package builders and tests.
 - The platform-independent relay and its OS packages belong to the separate `mdns-vpn-bridge` project.
-- The UI IPK declares `mdns-vpn-bridge >= 0.2.0`; the complete delivery bundle includes both IPKs. Neither installs a VPN.
+- The UI IPK declares `mdns-vpn-bridge >= 0.5.0`; the complete delivery bundle includes both IPKs. Neither installs a VPN.
 - Works with a reachable remote relay over Tailscale, WireGuard or another suitable unicast VPN; the UI itself is RutOS-specific.
 - The relay core is shared with the platform-independent Linux package; the current relay counterpart is 0.5.0. Only the WebUI is RutOS-specific.
 
