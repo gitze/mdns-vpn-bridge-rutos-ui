@@ -88,6 +88,6 @@
 | `/etc/init.d/cron` | `05c3a465864edfb040d10d02310af9198169200b25debf0cb324060bd8f48637` |
 
 - Read-only sources: `/proc/<pid>/status`, `ubus service.list` for fixed names `network`/`cron`, `/usr/share/vuci/path.d/network.json`, `/usr/share/rpcd/acl.d/network.json`, `/usr/share/acl.d/api_acl.json`, `/usr/share/acl.d/api_wireguard.json`, `/etc/permtab.d/network`, `/etc/group`, file metadata and non-mutating `test -w`.
-- LuaJIT disassembly retained outside the repository as `root-services-bytecode.txt`: ConfigService import/section registration; selected before/after-commit hooks including the mobile extension.
+- LuaJIT disassembly confirms: ConfigService import/section registration; selected before/after-commit hooks including the mobile extension.
 - No vendor code or actual network/cron configuration contents are reproduced here.
 - Shared native privilege evidence and package-lifecycle analysis: [main blueprint](rutos-plugin-blueprint.md), [evidence ledger](rutos-plugin-evidence.json).

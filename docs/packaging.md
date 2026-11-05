@@ -14,7 +14,7 @@
 ## Build contract
 
 - `make` builds the UI and combines `api/files/` and `ui/files/` into an IPK.
-- Version: 0.3.1, not deployed; display name `mDNS VPN Bridge WebUI` in control/main/feed, package identity unchanged. Previous UI 0.3.0 is installed. Same functional fixes as 0.2.10; the inspected RutOS GUI comparator rejects 0.2.10 against 0.2.9 but accepts 0.3.0. Native opkg comparison is separate. Tested installed version: 0.2.6 (0.2.9 installed on the reference router for read-only inspection).
+- Version: 0.3.1, installed together with relay 0.4.1 through the complete bundle; display name `mDNS VPN Bridge WebUI` in control/main/feed, package identity unchanged. Same functional fixes as 0.2.10; the inspected RutOS GUI comparator rejects 0.2.10 against 0.2.9 but accepts 0.3.0. Native opkg comparison is separate. Earlier tested installed version: 0.2.6 (0.2.9 was installed on the reference router for read-only inspection).
 - Architecture: `cortexa7hf-neon-vfpv4`; target firmware: `RUTX_R_00.07.25.3`.
 - GUI upload format: gzip tar archive containing `main`, one IPK and `Packages.gz`.
 - `main` fields are case-sensitive; use the full firmware identifier.
@@ -90,10 +90,10 @@ RutOS uses `dest root /usr/local` and an overlay document root.
 3. Unpack the final bundle, verify feed checksums, control fields, maintainer
    scripts and modes, payload paths, source bytes and menu asset reference.
 4. Router-side no-action package checks, without installation or touching the GUI's upload staging directory.
-5. After user installation and an approved backend reload, verify authenticated status/config/interface responses, visible native selection and help text.
-6. With explicit authorization, verify persistent UCI and actual process changes after Save & Apply/restart. A success response alone is not proof.
+5. After user installation and an approved backend reload, verify authenticated status/config/interface responses, visible native selection and help text. (Passed for 0.3.1: user acceptance confirmed the installed WebUI and native controls.)
+6. With explicit authorization, verify persistent UCI and actual process changes after Save & Apply/restart. A success response alone is not proof. (Passed for 0.3.1: stats 300s→60s persisted and survived a browser reload; explicit Restart confirmed. Reverse-path large-MTU behaviour and a production peer-address migration test remain unexercised.)
 
-## Known state and unresolved issue
+## Known state
 
 - Installed 0.2.6: authenticated read endpoints, native layout, LAN-interface selection and English help are verified on RutOS 7.25.3.
 - 0.2.8 replaced the FunctionService shell-write action with a native
@@ -118,14 +118,15 @@ RutOS uses `dest root /usr/local` and an overlay document root.
     shows concrete guidance, and parses the real RutOS error entries
     (`error`/`message`, `source`/`field`, nested envelopes) without dumping
     arbitrary objects. `validate_stats` returns the native second-value message.
-- Production writes/reloads/restarts are still **not** verified on the router:
-  no installation, UCI write, reload or restart was performed for this revision.
-  The native contracts are confirmed against the firmware bytecode and the live
-  framework with the mutation boundary mocked; the end-to-end Save & Apply and
-  restart results must still be confirmed on device. The framework's surfacing of
-  a custom option-validator message could not be exercised without a full
-  authenticated PUT; the view's client-side validation guarantees the user sees
-  the guidance regardless.
+- Production Save & Apply / restart is **verified by user acceptance** for relay
+  0.4.1 + UI 0.3.1: stats 300s → 60s was saved, persisted in UCI and retained
+  after a browser reload; the baseline was restored and retained; explicit
+  Restart succeeded. A read-only follow-up confirmed UCI stats=5m, the relay
+  running 0.4.1 with fresh uptime, bidirectional traffic and zero errors. The
+  agent did not drive an authenticated browser session; the earlier isolated
+  evidence (native contracts against firmware bytecode with the mutation
+  boundary mocked) remains as supporting detail. Reverse-path large-MTU
+  behaviour and a production peer-address migration test were not exercised.
 - `tests/test_actions.lua` covers the declared schema, the validator's native
   second-return message and the restart success path; `tests/test_edge_cases.lua`
   covers the duration boundary, the nil-data rc reply regression and the

@@ -18,6 +18,7 @@ Optional Teltonika RutOS WebUI for [mdns-vpn-bridge](https://github.com/gitze/md
 - The platform-independent relay and its OS packages belong to the separate `mdns-vpn-bridge` project.
 - The UI IPK declares `mdns-vpn-bridge >= 0.2.0`; the complete delivery bundle includes both IPKs. Neither installs a VPN.
 - Works with a reachable remote relay over Tailscale, WireGuard or another suitable unicast VPN; the UI itself is RutOS-specific.
+- The relay core is shared with the platform-independent Linux package; the current relay counterpart is 0.4.0. Only the WebUI is RutOS-specific.
 
 ## Layout
 
@@ -69,7 +70,9 @@ uses the privileged `rc.init` RPC (`uhttpd` → `rc` plugin worker →
 ## Status
 
 - Installed release 0.2.6: native layout, authenticated status/config/interface reads, interface selection and English tooltips verified on RutOS 7.25.3.
-- User confirmed successful installation of complete bundle: relay 0.4.1 + UI 0.3.1. Current Save/Apply/Restart live acceptance remains open; saved browser login was rejected, no additional credential attempts made.
+- User confirmed successful installation of complete bundle: relay 0.4.1 + UI 0.3.1. User-guided live acceptance passed: manual Refresh, stats 300s -> 60s saved and retained after browser reload, baseline restored and retained, explicit Restart successful. Read-only router follow-up confirmed UCI stats=5m, running relay 0.4.1, fresh uptime, bidirectional traffic and errors=0.
+- Open UI enhancement: status/traffic refresh is manual; no automatic polling.
+- Not claimed / not exercised: reverse-path large-MTU behaviour and a production peer-address migration test.
 - Historical 0.3.0: same functional fixes as 0.2.10; version bump bypasses the inspected RutOS GUI comparator, which incorrectly rejects 0.2.10 as older than installed 0.2.9.
 - Changes since 0.2.9: fixes the enabled **Restart service**
   failure and improves configuration/validation error feedback.
@@ -95,13 +98,7 @@ uses the privileged `rc.init` RPC (`uhttpd` → `rc` plugin worker →
   (`postinst`/`postrm`/`prerm`) and a `permtab` rule granting the unprivileged
   WebUI worker write access to the relay config without a root WebUI or a
   world-writable file.
-- Production Save & Apply / restart is **not verified working on the router**:
-  no router-side installation, write, reload or restart was performed for this
-  revision. The native contracts are confirmed against the firmware bytecode and
-  the live router's framework with the mutation boundary mocked
-  (`tests/native_put_id_gate.lua`; the isolated restart checks drive the real
-  `ConfigService`/responder with `rc.init` intercepted). The end-to-end result
-  must still be confirmed on device.
+- Earlier verification was isolated: native contracts against firmware bytecode with mutation mocked (`tests/native_put_id_gate.lua` and intercepted `rc.init`). This is supplemented by the user-guided production acceptance above; no agent-driven authenticated browser test is claimed.
 - Regression tests mock system/HTTP operations. They do not establish production
   write permissions or successful reload/start behaviour.
 - Project extraction does not deploy, stop or change any running service.

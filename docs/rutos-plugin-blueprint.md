@@ -48,9 +48,9 @@ rpcd parent                               user rpcd; SETUID/SETGID capabilities
 - A browser administrator is not a root Linux process.
 - `vuci.util.ubus` connects to ubus and calls the named object/method; it does not itself turn the Lua process into root.
 - The persistent `rpcd` process is **not** root on this firmware. Its effective capability mask was `0xc0` (`SETGID`, `SETUID`).
-- `rpcd` native worker dispatcher at analysis address `0x1446c` forks, loads the selected plugin descriptor, selects the worker user/groups and capabilities, then invokes that plugin's method.
-- In `rc.so`, exported `rpc_plugin` is at ELF virtual address `0x3004`. Its user pointer at `+0x0c` is null. The observed dispatcher handles that case with root supplementary groups, `setgid(0)` and `setuid(0)`.
-- The `rc.init` handler (Ghidra analysis address `0x113e8`) rejects service-name path traversal, allowlists actions, forks/executes `/etc/init.d/<name>` and waits for its exit status.
+- The `rpcd` native worker dispatcher forks, loads the selected plugin descriptor, selects the worker user/groups and capabilities, then invokes that plugin's method.
+- In `rc.so`, the exported `rpc_plugin` descriptor carries a null user pointer. The observed dispatcher handles that case with root supplementary groups, `setgid(0)` and `setuid(0)`.
+- The `rc.init` handler rejects service-name path traversal, allowlists actions, forks/executes `/etc/init.d/<name>` and waits for its exit status.
 - Allowed native actions observed: `disable`, `enable`, `stop`, `start`, `restart`, `reload`, `activate`, `deactivate`. `enabled` is not an allowed action; a read-only probe returned Invalid argument.
 - A successful init-script exit is not proof that a daemon has reached readiness or adopted the intended configuration. Read back runtime state.
 

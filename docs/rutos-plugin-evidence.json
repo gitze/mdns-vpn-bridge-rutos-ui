@@ -25,165 +25,13 @@
     {
       "artifact": "rc-init-function.json",
       "evidence_id": "ev_18b516e732e2391537e66334bc48dccc5b030e62c629250af01c9aefd7c55f08",
-      "procedure": {
-        "address": "0x113e8",
-        "name": "FUN_000113e8",
-        "classification": {
-          "external": false,
-          "thunk": false,
-          "thunk_target": null,
-          "provenance": "ghidra-function-manager"
-        },
-        "body": {
-          "available": true,
-          "provenance": "ghidra-function-body-address-set",
-          "ranges": [
-            {
-              "start": "0x113e8",
-              "end": "0x1176b"
-            }
-          ],
-          "total_bytes": 900,
-          "span_bytes": 900,
-          "non_contiguous": false,
-          "contains_entry": true
-        },
-        "signature": "undefined FUN_000113e8()",
-        "locals": [
-          {
-            "description": "undefined4 local_10a4 @ Stack[-0x10a4]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_10a8 @ Stack[-0x10a8]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_10ac @ Stack[-0x10ac]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_10b0 @ Stack[-0x10b0]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_10b4 @ Stack[-0x10b4]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_10b8 @ Stack[-0x10b8]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_10bc @ Stack[-0x10bc]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_10c8 @ Stack[-0x10c8]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_2c @ Stack[-0x2c]:4",
-            "provenance": "ghidra-function-database"
-          }
-        ]
-      },
+      "symbol": "rc.init handler (service-name path-traversal rejection, action allowlist, fork/exec /etc/init.d/<name>, wait for exit status)",
       "sha256": "269caedc5fef7742190317a66a668abe27afdf1baa76a7b9a64b911cd6898fba"
     },
     {
       "artifact": "rpcd-exec-function.json",
       "evidence_id": "ev_c2e9d5c800f6ccce00e3775a07930b42b617417f8c1bad63b8651fafeed1c656",
-      "procedure": {
-        "address": "0x1446c",
-        "name": "FUN_0001446c",
-        "classification": {
-          "external": false,
-          "thunk": false,
-          "thunk_target": null,
-          "provenance": "ghidra-function-manager"
-        },
-        "body": {
-          "available": true,
-          "provenance": "ghidra-function-body-address-set",
-          "ranges": [
-            {
-              "start": "0x1446c",
-              "end": "0x14b87"
-            }
-          ],
-          "total_bytes": 1820,
-          "span_bytes": 1820,
-          "non_contiguous": false,
-          "contains_entry": true
-        },
-        "signature": "undefined FUN_0001446c()",
-        "locals": [
-          {
-            "description": "undefined4 local_100 @ Stack[-0x100]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_104 @ Stack[-0x104]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_108 @ Stack[-0x108]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_110 @ Stack[-0x110]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_2c @ Stack[-0x2c]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_d0 @ Stack[-0xd0]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_d4 @ Stack[-0xd4]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_d8 @ Stack[-0xd8]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_dc @ Stack[-0xdc]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_e0 @ Stack[-0xe0]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_e4 @ Stack[-0xe4]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_e8 @ Stack[-0xe8]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_ec @ Stack[-0xec]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_f0 @ Stack[-0xf0]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_f4 @ Stack[-0xf4]:4",
-            "provenance": "ghidra-function-database"
-          },
-          {
-            "description": "undefined4 local_fc @ Stack[-0xfc]:4",
-            "provenance": "ghidra-function-database"
-          }
-        ]
-      },
+      "symbol": "rpcd plugin worker dispatcher (loads plugin descriptor, selects worker user/groups and capabilities, invokes plugin method)",
       "sha256": "21fced9efafa65bb03818f2bb35df77e06de2788de31960d6f2422d96fc49d22"
     }
   ],
@@ -241,20 +89,14 @@
       ]
     },
     "E6": {
-      "kind": "Ghidra 12.1.2 pseudocode and assembly; plugin descriptor data",
+      "kind": "native pseudocode and assembly; plugin descriptor data",
       "rpcd_sha256": "21fced9efafa65bb03818f2bb35df77e06de2788de31960d6f2422d96fc49d22",
       "rc_plugin_sha256": "269caedc5fef7742190317a66a668abe27afdf1baa76a7b9a64b911cd6898fba",
-      "rpcd_dispatch_analysis_address": "0x1446c",
-      "root_setuid_zero_callsite": "0x1478c",
-      "rc_init_analysis_address": "0x113e8",
-      "rc_descriptor_elf_address": "0x3004",
-      "rc_descriptor_user_pointer_offset": "0x0c",
       "rc_descriptor_user_pointer_value": 0
     },
     "E7": {
       "kind": "installed /lib/functions.sh",
       "function": "default_postinst",
-      "local_retained_file": "system-functions.sh",
       "source_lines": {
         "ubusd_hup": [
           257,
@@ -281,7 +123,6 @@
         "/usr/lib/lua/api/services/openvpn.lua",
         "/usr/lib/lua/api/status/services.lua"
       ],
-      "retained_disassembly": "reference-packages-bytecode.txt",
       "sha256": [
         "17016ffb54d3773b3f9037ab30ce01e90cd3cbd94fd956fcd56dda26c21606ef",
         "a37a66c19533f501eb947593e7405d450bc535ecafa0ad783ff52f879fa4ce3b",

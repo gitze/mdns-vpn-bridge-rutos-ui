@@ -8,7 +8,7 @@
 - Archive: `main`, both IPKs, `Packages.gz` with both package stanzas and hashes.
 - Main package is the UI (version 0.3.1); its dependency selects the included relay when missing. The archive name 0.4.1 denotes the relay release, not a changed UI version.
 - Existing relay 0.4.1 satisfies the dependency; installing the missing UI does not require forcing a relay reinstall.
-- Fresh build, Lua/frontend/packaging tests passed. Native PUT test skipped locally (firmware interpreter not configured); not claimed as tested.
+- Fresh build, Lua/frontend/packaging tests passed. The isolated native PUT test self-skipped locally (firmware interpreter not configured) and is not claimed as run; the live PUT path is covered by the user acceptance below.
 - Bundle repeated byte-identically; both control records, relay identity, dependency, hashes, firmware-mismatch rejection and malformed-IPK rejection checked.
 - Native router opkg `--noaction` accepted UI installation with the existing relay. Separate scratch destination/status without either package selected relay 0.4.1 followed by UI 0.3.1. Actual router package state/service unchanged.
-- No installation or publication performed. GUI upload/rendering remains to be verified after user installation.
+- The user installed this bundle through the RutOS package management UI and confirmed the WebUI renders; the live acceptance (Save & Apply, persistence, restart) is recorded in the README. No publication was performed.
