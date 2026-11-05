@@ -1,0 +1,10 @@
+node_modules
+.npm/
+ui/dest/
+ui/.plugin/
+ui/.env.plugin*
+__pycache__/
+*.pyc
+*.ipk
+*.tar.gz
+.DS_Store

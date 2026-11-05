@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+# default:prerm
+IPKG_INSTROOT=${IPKG_INSTROOT:-$D}
+if [ -s "$IPKG_INSTROOT/lib/functions.sh" ]; then
+    . "$IPKG_INSTROOT/lib/functions.sh"
+    [ -n "${IPKG_INSTROOT}" ] && set -x
+    default_prerm $0 $@
+fi

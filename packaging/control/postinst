@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+# default:postinst
+IPKG_INSTROOT=${IPKG_INSTROOT:-$D}
+if [ -s "$IPKG_INSTROOT/lib/functions.sh" ]; then
+    . "$IPKG_INSTROOT/lib/functions.sh"
+    [ -n "$IPKG_INSTROOT" ] && set -x || set +e
+fi
+(
+:
+)
+# Native lifecycle: loads OS-user ubus ACLs (usr/share/acl.d) into ubusd,
+# applies etc/permtab.d and etc/uci-defaults, starts package-owned init scripts
+# and restores /etc/config permissions.
+if command -v default_postinst >/dev/null 2>&1; then
+    default_postinst $0 $@
+fi
+
+# Offline SDK/DESTDIR staging: no running system to refresh.
+if [ -n "$D" ]; then
+    exit 0
+fi
+
+# Refresh API-session ACLs and let the WebUI reload its routes/backend.
+# Session reload_acls is distinct from the ubusd ACL load done above.
+[ -x /etc/init.d/rpcd ] && ubus call session reload_acls
+[ -x /etc/init.d/uhttpd ] && killall -q -1 uhttpd || true
+ubus send vuci.notify '{"event": "reload_routes"}' 2>/dev/null || true

@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+# Refresh API-session ACLs and let the WebUI reload its routes after removal.
+[ -x /etc/init.d/rpcd ] && ubus call session reload_acls
+[ -x /etc/init.d/uhttpd ] && killall -q -1 uhttpd || true
+ubus send vuci.notify '{"event": "reload_routes"}' 2>/dev/null || true

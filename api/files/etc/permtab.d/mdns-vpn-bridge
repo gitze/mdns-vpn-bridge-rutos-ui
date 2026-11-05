@@ -1,0 +1,5 @@
+# Format: <path> <owner:group> <permissions> <options>
+# The relay config must be writable by the unprivileged WebUI worker (uhttpd)
+# so ConfigService/UCI Save & Apply works without a root WebUI or world-writable
+# config. Owner stays root; the uhttpd group gets read/write (0660).
+/etc/config/mdns-vpn-bridge     root:uhttpd     660     -

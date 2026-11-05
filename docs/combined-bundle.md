@@ -1,0 +1,14 @@
+# Combined RutOS bundle
+
+- Deliver one GUI-uploadable archive containing two separate packages: relay 0.4.1 and WebUI 0.3.1.
+- Keep source projects and installed package identities separate; bundle composition belongs to this UI project.
+- Artifact: `dist/mdns-vpn-bridge-complete_0.4.1_RUTX_00.07.25.3.tar.gz`.
+- SHA256: `65d8f232280802d601c1e011fed03843cc1f123664de8a53f9564b3138c75cde`.
+- Build: `make bundle RELAY_IPK=/absolute/path/mdns-vpn-bridge_0.4.1_cortexa7hf-neon-vfpv4.ipk`.
+- Archive: `main`, both IPKs, `Packages.gz` with both package stanzas and hashes.
+- Main package is the UI (version 0.3.1); its dependency selects the included relay when missing. The archive name 0.4.1 denotes the relay release, not a changed UI version.
+- Existing relay 0.4.1 satisfies the dependency; installing the missing UI does not require forcing a relay reinstall.
+- Fresh build, Lua/frontend/packaging tests passed. Native PUT test skipped locally (firmware interpreter not configured); not claimed as tested.
+- Bundle repeated byte-identically; both control records, relay identity, dependency, hashes, firmware-mismatch rejection and malformed-IPK rejection checked.
+- Native router opkg `--noaction` accepted UI installation with the existing relay. Separate scratch destination/status without either package selected relay 0.4.1 followed by UI 0.3.1. Actual router package state/service unchanged.
+- No installation or publication performed. GUI upload/rendering remains to be verified after user installation.

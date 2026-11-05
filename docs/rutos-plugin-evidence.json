@@ -1,0 +1,297 @@
+{
+  "platform": "RUTX_R_00.07.25.3",
+  "analysis_mode": "static plus read-only on-device probes; no service/config mutations",
+  "packages": [
+    {
+      "file": "tailscale_1.96.5-r0_rutx.ipk",
+      "sha256": "7726cf2b567ea502a22a72d7326ba5d991fe084203ab6d09874a32f4f1e07c23",
+      "size_bytes": 4963330,
+      "feed_index_sha256_matched": true
+    },
+    {
+      "file": "vuci-app-tailscale-api_git-r0_cortexa7hf-neon-vfpv4.ipk",
+      "sha256": "44a2e81709eb1ae723eda3fd6740ad5ac0a2c38a279c0be12c63a7eeb26b92c8",
+      "size_bytes": 6032,
+      "feed_index_sha256_matched": true
+    },
+    {
+      "file": "vuci-app-tailscale-ui_git-r0_all.ipk",
+      "sha256": "4cdc75165820e53267694e3b7402249ef14a34bb5513ae9f851cda645012fceb",
+      "size_bytes": 5310,
+      "feed_index_sha256_matched": true
+    }
+  ],
+  "native_evidence": [
+    {
+      "artifact": "rc-init-function.json",
+      "evidence_id": "ev_18b516e732e2391537e66334bc48dccc5b030e62c629250af01c9aefd7c55f08",
+      "procedure": {
+        "address": "0x113e8",
+        "name": "FUN_000113e8",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x113e8",
+              "end": "0x1176b"
+            }
+          ],
+          "total_bytes": 900,
+          "span_bytes": 900,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_000113e8()",
+        "locals": [
+          {
+            "description": "undefined4 local_10a4 @ Stack[-0x10a4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_10a8 @ Stack[-0x10a8]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_10ac @ Stack[-0x10ac]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_10b0 @ Stack[-0x10b0]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_10b4 @ Stack[-0x10b4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_10b8 @ Stack[-0x10b8]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_10bc @ Stack[-0x10bc]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_10c8 @ Stack[-0x10c8]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_2c @ Stack[-0x2c]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "sha256": "269caedc5fef7742190317a66a668abe27afdf1baa76a7b9a64b911cd6898fba"
+    },
+    {
+      "artifact": "rpcd-exec-function.json",
+      "evidence_id": "ev_c2e9d5c800f6ccce00e3775a07930b42b617417f8c1bad63b8651fafeed1c656",
+      "procedure": {
+        "address": "0x1446c",
+        "name": "FUN_0001446c",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x1446c",
+              "end": "0x14b87"
+            }
+          ],
+          "total_bytes": 1820,
+          "span_bytes": 1820,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined FUN_0001446c()",
+        "locals": [
+          {
+            "description": "undefined4 local_100 @ Stack[-0x100]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_104 @ Stack[-0x104]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_108 @ Stack[-0x108]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_110 @ Stack[-0x110]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_2c @ Stack[-0x2c]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_d0 @ Stack[-0xd0]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_d4 @ Stack[-0xd4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_d8 @ Stack[-0xd8]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_dc @ Stack[-0xdc]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_e0 @ Stack[-0xe0]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_e4 @ Stack[-0xe4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_e8 @ Stack[-0xe8]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_ec @ Stack[-0xec]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_f0 @ Stack[-0xf0]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_f4 @ Stack[-0xf4]:4",
+            "provenance": "ghidra-function-database"
+          },
+          {
+            "description": "undefined4 local_fc @ Stack[-0xfc]:4",
+            "provenance": "ghidra-function-database"
+          }
+        ]
+      },
+      "sha256": "21fced9efafa65bb03818f2bb35df77e06de2788de31960d6f2422d96fc49d22"
+    }
+  ],
+  "sources": {
+    "E1": {
+      "kind": "feed-authenticated package control, payload and maintainer scripts",
+      "packages": [
+        "tailscale_1.96.5-r0_rutx.ipk",
+        "vuci-app-tailscale-api_git-r0_cortexa7hf-neon-vfpv4.ipk",
+        "vuci-app-tailscale-ui_git-r0_all.ipk"
+      ]
+    },
+    "E2": {
+      "kind": "package JSON declarations",
+      "paths": [
+        "usr/share/vuci/path.d/tailscale.json",
+        "usr/share/rpcd/acl.d/tailscale.json",
+        "usr/share/acl.d/api_tailscale.json"
+      ]
+    },
+    "E3": {
+      "kind": "LuaJIT disassembly and read-only process/file probes",
+      "files": [
+        "tailscale-bytecode.txt",
+        "framework-bytecode.txt",
+        "commit-bytecode.txt"
+      ],
+      "lua_runtime": "LuaJIT 2.1.1705946796",
+      "decoder_reference_revision": "3ca0a80711ef53e2e788bca7b282f8ad7c927b59",
+      "installed_and_packaged_backend_sha256": "b49827626f4c40beb71fbd0fc81c378fc01d72c4e9068743c7a2df15e84cbfd0"
+    },
+    "E4": {
+      "kind": "decompressed shipped frontend",
+      "files": [
+        "app.tailscale.app-2026-09-23-7a19e387fb.js",
+        "shared.js",
+        "core.js"
+      ],
+      "verified_shared_js_character_offsets": {
+        "config_entity": 188325,
+        "config_put_body": 97155,
+        "csrf_header": 150358,
+        "logout_path": 188410,
+        "status_path": 188449
+      }
+    },
+    "E5": {
+      "kind": "API Core/UCI bytecode",
+      "functions": [
+        "ConfigService.PUT_commit",
+        "api_table_wrapper.general_commit",
+        "api_table_wrapper.commit",
+        "vuci.uci.commit",
+        "vuci.uci.commit_without_event"
+      ]
+    },
+    "E6": {
+      "kind": "Ghidra 12.1.2 pseudocode and assembly; plugin descriptor data",
+      "rpcd_sha256": "21fced9efafa65bb03818f2bb35df77e06de2788de31960d6f2422d96fc49d22",
+      "rc_plugin_sha256": "269caedc5fef7742190317a66a668abe27afdf1baa76a7b9a64b911cd6898fba",
+      "rpcd_dispatch_analysis_address": "0x1446c",
+      "root_setuid_zero_callsite": "0x1478c",
+      "rc_init_analysis_address": "0x113e8",
+      "rc_descriptor_elf_address": "0x3004",
+      "rc_descriptor_user_pointer_offset": "0x0c",
+      "rc_descriptor_user_pointer_value": 0
+    },
+    "E7": {
+      "kind": "installed /lib/functions.sh",
+      "function": "default_postinst",
+      "local_retained_file": "system-functions.sh",
+      "source_lines": {
+        "ubusd_hup": [
+          257,
+          259
+        ],
+        "permtab": [
+          265,
+          267
+        ],
+        "owned_service_start": [
+          284,
+          294
+        ],
+        "config_permissions": [
+          300,
+          302
+        ]
+      }
+    },
+    "E8": {
+      "kind": "installed secondary references",
+      "files": [
+        "/usr/lib/lua/api/services/ddns.lua",
+        "/usr/lib/lua/api/services/openvpn.lua",
+        "/usr/lib/lua/api/status/services.lua"
+      ],
+      "retained_disassembly": "reference-packages-bytecode.txt",
+      "sha256": [
+        "17016ffb54d3773b3f9037ab30ce01e90cd3cbd94fd956fcd56dda26c21606ef",
+        "a37a66c19533f501eb947593e7405d450bc535ecafa0ad783ff52f879fa4ce3b",
+        "4d7e967095571c00a6cea74d5b014a74a1ebbcbc3bb674b0320a0c3977082a92"
+      ]
+    }
+  },
+  "limits": [
+    "Native code was analyzed statically, not attached to a live privileged action.",
+    "No successful live configuration change/restart was asserted for the mDNS UI.",
+    "Vendor binaries, source and decompilation remain outside the repository."
+  ]
+}

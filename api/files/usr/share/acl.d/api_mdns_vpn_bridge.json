@@ -1,0 +1,7 @@
+{
+  "user": "uhttpd",
+  "access": {
+    "service": {"methods": ["list", "event"]},
+    "rc": {"methods": ["init"]}
+  }
+}
