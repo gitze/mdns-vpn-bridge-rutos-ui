@@ -1,5 +1,13 @@
 # mdns-vpn-bridge-rutos-ui
 
+## Stable latest downloads
+
+- **[Complete RutOS relay + WebUI bundle — one GUI upload](https://github.com/gitze/mdns-vpn-bridge-rutos-ui/releases/latest/download/mdns-vpn-bridge-complete.tar.gz)**
+- [Standalone UI IPK — component-only use](https://github.com/gitze/mdns-vpn-bridge-rutos-ui/releases/latest/download/mdns-vpn-bridge-rutos-ui.ipk)
+- [SHA256 checksums](https://github.com/gitze/mdns-vpn-bridge-rutos-ui/releases/latest/download/sha256sums.txt)
+
+These versionless URLs follow the latest stable GitHub release. Include these exact asset names and their checksums in every future release. The bundle still targets the firmware/architecture listed in the release notes; a stable filename is not a compatibility guarantee.
+
 Optional Teltonika RutOS WebUI for [mdns-vpn-bridge](https://github.com/gitze/mdns-vpn-bridge).
 
 ## Package names
