@@ -14,7 +14,7 @@
 ## Build contract
 
 - `make` builds the UI and combines `api/files/` and `ui/files/` into an IPK.
-- Version: 0.3.1, installed together with relay 0.4.1 through the complete bundle; display name `mDNS VPN Bridge WebUI` in control/main/feed, package identity unchanged. Same functional fixes as 0.2.10; the inspected RutOS GUI comparator rejects 0.2.10 against 0.2.9 but accepts 0.3.0. Native opkg comparison is separate. Earlier tested installed version: 0.2.6 (0.2.9 was installed on the reference router for read-only inspection).
+- Version: 0.5.0, delivered together with relay 0.5.0 through the complete bundle; display name `mDNS VPN Bridge WebUI` in control/main/feed, package identity unchanged. Release version bump only; same functional fixes as 0.2.10. Earlier tested installed version: 0.2.6 (0.2.9 was installed on the reference router for read-only inspection).
 - Architecture: `cortexa7hf-neon-vfpv4`; target firmware: `RUTX_R_00.07.25.3`.
 - GUI upload format: gzip tar archive containing `main`, one IPK and `Packages.gz`.
 - `main` fields are case-sensitive; use the full firmware identifier.
@@ -86,12 +86,15 @@ RutOS uses `dest root /usr/local` and an overlay document root.
      for Linux i386: `docker run --rm --platform linux/386 -v $PWD/tests:/t:ro
      -v <rootfs>/usr/lib/lua:/native:ro i386/debian:bookworm bash -c
      '<build LuaJIT 2.1 with -DLUAJIT_DISABLE_GC64> && ./src/luajit /t/native_put_id_gate.lua /native'`.
+   - Latest run (0.5.0 prep): the isolated test passed against the extracted
+     RutOS 7.25.3 rootfs `api/put_logic.lua` bytecode; the router itself was not
+     reachable, so the SSH variant was not exercised.
 2. `make`: compile native Vue components and build the final IPK/bundle.
 3. Unpack the final bundle, verify feed checksums, control fields, maintainer
    scripts and modes, payload paths, source bytes and menu asset reference.
 4. Router-side no-action package checks, without installation or touching the GUI's upload staging directory.
-5. After user installation and an approved backend reload, verify authenticated status/config/interface responses, visible native selection and help text. (Passed for 0.3.1: user acceptance confirmed the installed WebUI and native controls.)
-6. With explicit authorization, verify persistent UCI and actual process changes after Save & Apply/restart. A success response alone is not proof. (Passed for 0.3.1: stats 300s→60s persisted and survived a browser reload; explicit Restart confirmed. Reverse-path large-MTU behaviour and a production peer-address migration test remain unexercised.)
+5. After user installation and an approved backend reload, verify authenticated status/config/interface responses, visible native selection and help text. (Historical pass for 0.3.1: user acceptance confirmed the installed WebUI and native controls.)
+6. With explicit authorization, verify persistent UCI and actual process changes after Save & Apply/restart. A success response alone is not proof. (Historical pass for 0.3.1: stats 300s→60s persisted and survived a browser reload; explicit Restart confirmed. Reverse-path large-MTU behaviour and a production peer-address migration test remain unexercised.)
 
 ## Known state
 
@@ -118,8 +121,8 @@ RutOS uses `dest root /usr/local` and an overlay document root.
     shows concrete guidance, and parses the real RutOS error entries
     (`error`/`message`, `source`/`field`, nested envelopes) without dumping
     arbitrary objects. `validate_stats` returns the native second-value message.
-- Production Save & Apply / restart is **verified by user acceptance** for relay
-  0.4.1 + UI 0.3.1: stats 300s → 60s was saved, persisted in UCI and retained
+- Production Save & Apply / restart is **verified by user acceptance** (historical, relay
+  0.4.1 + UI 0.3.1): stats 300s → 60s was saved, persisted in UCI and retained
   after a browser reload; the baseline was restored and retained; explicit
   Restart succeeded. A read-only follow-up confirmed UCI stats=5m, the relay
   running 0.4.1 with fresh uptime, bidirectional traffic and zero errors. The

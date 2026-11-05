@@ -16,7 +16,7 @@ import tarfile
 HERE = pathlib.Path(__file__).resolve().parent
 PROJECT_ROOT = HERE.parent
 CONTROL_DIR = HERE / "control"
-VERSION = "0.3.1"
+VERSION = "0.5.0"
 ARCH = "cortexa7hf-neon-vfpv4"
 MAINTAINER_SCRIPTS = ("postinst", "postrm", "prerm")
 

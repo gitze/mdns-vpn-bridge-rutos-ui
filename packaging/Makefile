@@ -1,10 +1,10 @@
 # Build one uploadable RutOS IPK from the API sources and compiled UI assets.
 PYTHON ?= python3
 UI := ../ui
-OUTPUT ?= mdns-vpn-bridge-rutos-ui_0.3.1_cortexa7hf-neon-vfpv4.ipk
+OUTPUT ?= mdns-vpn-bridge-rutos-ui_0.5.0_cortexa7hf-neon-vfpv4.ipk
 
 FIRMWARE ?= 00.07.25.3
-BUNDLE := mdns-vpn-bridge-rutos-ui_0.3.1_RUTX_$(FIRMWARE).tar.gz
+BUNDLE := mdns-vpn-bridge-rutos-ui_0.5.0_RUTX_$(FIRMWARE).tar.gz
 
 API_FILES := $(shell find ../api/files -type f)
 CONTROL_FILES := $(wildcard control/postinst control/postrm control/prerm)
