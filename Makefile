@@ -7,13 +7,13 @@ build:
 	$(MAKE) -C packaging
 
 # One GUI upload; projects and installed packages remain separate.
-RELAY_VERSION ?= 0.5.0
+RELAY_VERSION ?= 0.5.1
 RELAY_IPK ?=
 BUNDLE_OUTPUT ?= dist/mdns-vpn-bridge-complete_$(RELAY_VERSION)_RUTX_00.07.25.3.tar.gz
 .PHONY: bundle
 bundle: build
 	@test -n "$(RELAY_IPK)" || { printf 'Set RELAY_IPK to the tested relay IPK path\n'; exit 1; }
-	python3 packaging/build_combined_bundle.py packaging/mdns-vpn-bridge-rutos-ui_0.5.0_cortexa7hf-neon-vfpv4.ipk "$(RELAY_IPK)" "$(BUNDLE_OUTPUT)"
+	python3 packaging/build_combined_bundle.py packaging/mdns-vpn-bridge-rutos-ui_0.5.1_cortexa7hf-neon-vfpv4.ipk "$(RELAY_IPK)" "$(BUNDLE_OUTPUT)"
 
 test:
 	$(LUA) tests/test_actions.lua api/files/usr/lib/lua/api/services/mdns_vpn_bridge.lua

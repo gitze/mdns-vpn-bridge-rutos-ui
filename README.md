@@ -17,16 +17,16 @@ Optional Teltonika RutOS WebUI for [mdns-vpn-bridge](https://github.com/gitze/md
 | `mdns-vpn-bridge` | mDNS VPN Bridge | Relay binary/service |
 | `mdns-vpn-bridge-rutos-ui` | mDNS VPN Bridge WebUI | Optional configuration/status UI; depends on relay |
 
-- Default delivery: one complete RutOS upload bundle containing relay 0.5.0 and UI 0.5.0. Source repositories and installed package identities stay separate.
-- UI 0.5.0 adds no runtime features; identifiers/API remain unchanged. The package requires relay >= 0.5.0 so the complete bundle also upgrades older relays.
+- Default delivery: one complete RutOS upload bundle containing relay 0.5.1 and UI 0.5.1. Source repositories and installed package identities stay separate.
+- UI 0.5.1 adds the native read-only `Relay version` and `WebUI version` status rows; identifiers and API remain otherwise unchanged. The package requires relay >= 0.5.1 so the complete bundle also upgrades older relays.
 
 ## Scope
 
 - This project owns the Vue UI, Lua API adapter, menu/ACL files, package builders and tests.
 - The platform-independent relay and its OS packages belong to the separate `mdns-vpn-bridge` project.
-- The UI IPK declares `mdns-vpn-bridge >= 0.5.0`; the complete delivery bundle includes both IPKs. Neither installs a VPN.
+- The UI IPK declares `mdns-vpn-bridge >= 0.5.1`; the complete delivery bundle includes both IPKs. Neither installs a VPN.
 - Works with a reachable remote relay over Tailscale, WireGuard or another suitable unicast VPN; the UI itself is RutOS-specific.
-- The relay core is shared with the platform-independent Linux package; the current relay counterpart is 0.5.0. Only the WebUI is RutOS-specific.
+- The relay core is shared with the platform-independent Linux package; the current relay counterpart is 0.5.1. Only the WebUI is RutOS-specific.
 
 ## Layout
 
@@ -45,10 +45,10 @@ No sibling checkout of the relay is required.
 
 ```sh
 make test
-make bundle RELAY_IPK=/absolute/path/mdns-vpn-bridge_0.5.0_cortexa7hf-neon-vfpv4.ipk
+make bundle RELAY_IPK=/absolute/path/mdns-vpn-bridge_0.5.1_cortexa7hf-neon-vfpv4.ipk
 ```
 
-Upload `dist/mdns-vpn-bridge-complete_0.5.0_RUTX_00.07.25.3.tar.gz` once through RutOS package management. It includes both packages. See [combined bundle](docs/combined-bundle.md).
+Upload `dist/mdns-vpn-bridge-complete_0.5.1_RUTX_00.07.25.3.tar.gz` once through RutOS package management. It includes both packages. See [combined bundle](docs/combined-bundle.md).
 Standalone component artifacts in `packaging/` are for explicit component-only use, not the default delivery.
 
 Changing loaded Lua modules requires an approved WebUI backend restart and ACL
@@ -77,8 +77,10 @@ uses the privileged `rc.init` RPC (`uhttpd` → `rc` plugin worker →
 
 ## Status
 
+- UI 0.5.1 adds native read-only `Relay version` and `WebUI version` rows. Relay identity comes from the running daemon's additive status `version` field; older daemons or a stopped service show `Unknown`. Frontend identity is injected from `ui/package.json` into the loaded build at build time. No extra command execution or permissions. Both updated components are needed for the runtime version display. This feature is not live-installed; no 0.5.1 on-device acceptance has been performed.
+
 - Installed release 0.2.6: native layout, authenticated status/config/interface reads, interface selection and English tooltips verified on RutOS 7.25.3.
-- Historical live acceptance (relay 0.4.1 + UI 0.3.1): user confirmed successful installation of the complete bundle. User-guided live acceptance passed: manual Refresh, stats 300s -> 60s saved and retained after browser reload, baseline restored and retained, explicit Restart successful. Read-only router follow-up confirmed UCI stats=5m, running relay 0.4.1, fresh uptime, bidirectional traffic and errors=0. Not re-run for 0.5.0.
+- Historical live acceptance (relay 0.4.1 + UI 0.3.1): user confirmed successful installation of the complete bundle. User-guided live acceptance passed: manual Refresh, stats 300s -> 60s saved and retained after browser reload, baseline restored and retained, explicit Restart successful. Read-only router follow-up confirmed UCI stats=5m, running relay 0.4.1, fresh uptime, bidirectional traffic and errors=0. Not re-run for 0.5.0 or 0.5.1.
 - Open UI enhancement: status/traffic refresh is manual; no automatic polling.
 - Not claimed / not exercised: reverse-path large-MTU behaviour and a production peer-address migration test.
 - Historical 0.3.0: same functional fixes as 0.2.10; version bump bypasses the inspected RutOS GUI comparator, which incorrectly rejects 0.2.10 as older than installed 0.2.9.

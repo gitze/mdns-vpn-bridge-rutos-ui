@@ -2,7 +2,7 @@
 
 ## Package boundary
 
-- Package: `mdns-vpn-bridge-rutos-ui`; dependency: `mdns-vpn-bridge >= 0.2.0`.
+- Package: `mdns-vpn-bridge-rutos-ui`; dependency: `mdns-vpn-bridge >= 0.5.1`.
 - Replaces/conflicts with the former `mdns-vpn-bridge-admin` package.
 - Owns Vue assets, the Lua ConfigService, route, menu, both ACL families and the
   permission-table rule for the relay config.
@@ -14,7 +14,7 @@
 ## Build contract
 
 - `make` builds the UI and combines `api/files/` and `ui/files/` into an IPK.
-- Version: 0.5.0, delivered together with relay 0.5.0 through the complete bundle; display name `mDNS VPN Bridge WebUI` in control/main/feed, package identity unchanged. Release version bump only; same functional fixes as 0.2.10. Earlier tested installed version: 0.2.6 (0.2.9 was installed on the reference router for read-only inspection).
+- Version: 0.5.1, delivered together with relay 0.5.1 through the complete bundle; display name `mDNS VPN Bridge WebUI` in control/main/feed, package identity unchanged. Adds the native read-only `Relay version` and `WebUI version` status rows (frontend version injected from `ui/package.json` at build time; running-relay version read from the status endpoint). Earlier tested installed version: 0.2.6 (0.2.9 was installed on the reference router for read-only inspection).
 - Architecture: `cortexa7hf-neon-vfpv4`; target firmware: `RUTX_R_00.07.25.3`.
 - GUI upload format: gzip tar archive containing `main`, one IPK and `Packages.gz`.
 - `main` fields are case-sensitive; use the full firmware identifier.
@@ -86,7 +86,7 @@ RutOS uses `dest root /usr/local` and an overlay document root.
      for Linux i386: `docker run --rm --platform linux/386 -v $PWD/tests:/t:ro
      -v <rootfs>/usr/lib/lua:/native:ro i386/debian:bookworm bash -c
      '<build LuaJIT 2.1 with -DLUAJIT_DISABLE_GC64> && ./src/luajit /t/native_put_id_gate.lua /native'`.
-   - Latest run (0.5.0 prep): the isolated test passed against the extracted
+   - Latest run (0.5.1 prep): the isolated test passed against the extracted
      RutOS 7.25.3 rootfs `api/put_logic.lua` bytecode; the router itself was not
      reachable, so the SSH variant was not exercised.
 2. `make`: compile native Vue components and build the final IPK/bundle.

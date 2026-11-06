@@ -165,4 +165,48 @@ assert.equal(instance.form.lan_if, "old-lan");
 assert.match(source, /this\.\$axios\.put\("\/api\/mdns_vpn_bridge_f\/config", \{ data: \[resource\] \}\)/);
 assert.match(source, /id: this\.configId/);
 assert.match(source, /<tlt-form-item-select v-model="form.lan_if"/);
-console.log("PASS: config data-array GET/PUT with server id echo, client stats validation, native error surface (field/message/nested), no-guess guard, verbatim stats, restart envelope, status and interface selection (mock transport)");
+
+// ---- Version display -------------------------------------------------------
+// The WebUI build version is injected at build time (__UI_VERSION__ via
+// vite.config.js) and is never hardcoded in the view. Without the build define
+// (this vm run) it falls back to a non-version token.
+assert.equal(instance.uiVersion, "unknown", "no build define must fall back, never a literal");
+const buildContext = { __UI_VERSION__: "9.9.9" };
+vm.runInNewContext(script.replace("export default", "globalThis.component = "), buildContext);
+assert.equal(buildContext.component.data().uiVersion, "9.9.9", "uiVersion must come from the injected build token");
+// No hardcoded semver *literal* anywhere in the component source (a firmware
+// number in a comment is fine; a quoted version value is not).
+assert.doesNotMatch(script, /["'`]\d+\.\d+\.\d+["'`]/, "the view must not hardcode a version literal");
+
+// Relay version reflects the *running* process reported by the API; Unknown when
+// stopped, absent or unreported (never invented).
+const relay = component.computed.relayVersion;
+instance.status = { relay_version: "0.5.1" };
+assert.equal(relay.call(instance), "0.5.1");
+for (const missing of ["", "-", undefined]) {
+  instance.status = { relay_version: missing };
+  assert.equal(relay.call(instance), "Unknown", `relay_version=${JSON.stringify(missing)} must show Unknown`);
+}
+instance.status = null;
+assert.equal(relay.call(instance), "Unknown", "stopped relay must show Unknown");
+
+// loadStatus carries relay_version through verbatim, and stays empty when absent.
+instance.$axios.get = async () => ({ running: "1", enabled: "1", relay_version: "0.5.1", lan_if: "br-lan", lan_ip: "192.0.2.2", peer: "100.64.0.1", peer_port: "53530", lan2peer: "all", peer2lan: "query", uptime: "1h02m", to_peer: "-", to_lan: "-" });
+await instance.loadStatus();
+assert.equal(instance.status.relay_version, "0.5.1");
+assert.equal(relay.call(instance), "0.5.1");
+instance.$axios.get = async () => ({ running: "1", enabled: "1", lan_if: "br-lan" });
+await instance.loadStatus();
+assert.equal(instance.status.relay_version, "", "a missing field must not invent a version");
+assert.equal(relay.call(instance), "Unknown");
+
+// Both rows render with native components; the build version is wired from
+// package.json by the Vite config.
+assert.match(source, /<tlt-form-model-item label="Relay version"[\s\S]*?<tlt-dummy-value :value="relayVersion" \/>/);
+assert.match(source, /<tlt-form-model-item label="WebUI version"[\s\S]*?<tlt-dummy-value :value="uiVersion" \/>/);
+assert.match(script, /typeof __UI_VERSION__ !== "undefined"/);
+const viteConfig = readFileSync(new URL("../ui/vite.config.js", import.meta.url), "utf8");
+const pkg = JSON.parse(readFileSync(new URL("../ui/package.json", import.meta.url), "utf8"));
+assert.match(viteConfig, /__UI_VERSION__:\s*JSON\.stringify\(pkg\.version\)/, "vite.config.js must define __UI_VERSION__ from package.json");
+assert.ok(/^\d+\.\d+\.\d+$/.test(pkg.version), "package.json version must be semver");
+console.log("PASS: config data-array GET/PUT with server id echo, client stats validation, native error surface (field/message/nested), no-guess guard, verbatim stats, restart envelope, status and interface selection, build-derived WebUI version and running-relay version mapping (mock transport)");

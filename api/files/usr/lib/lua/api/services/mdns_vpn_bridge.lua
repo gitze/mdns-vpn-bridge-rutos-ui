@@ -190,6 +190,13 @@ function Bridge:GET_TYPE_status()
 		return raw:match(pattern) or ""
 	end
 
+	-- Build version of the *running* relay process, taken from the status
+	-- endpoint's additive top-level "version" field (the running binary reports
+	-- its own -ldflags version). Older relays omit the field and a stopped relay
+	-- has no body at all, so an empty result is normal: the UI shows Unknown.
+	-- This is a plain read of already-fetched JSON, never a new command or exec.
+	local relay_version = num('"version":"([^"]*)"')
+
 	local uptime = num('"uptime_seconds":([%d%.]+)')
 	local up_txt = "-"
 	if uptime ~= "" then
@@ -220,6 +227,7 @@ function Bridge:GET_TYPE_status()
 	return self:ResponseOK({
 		running = running and "1" or "0",
 		enabled = enabled,
+		relay_version = relay_version,
 		lan_if = num('"lan_if":"([^"]*)"'),
 		lan_ip = num('"lan_ip":"([^"]*)"'),
 		peer = num('"peer":"([^"]*)"'),

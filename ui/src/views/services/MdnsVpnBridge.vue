@@ -28,6 +28,12 @@
           <tlt-dummy-value :value="status.to_lan" />
         </tlt-form-model-item>
       </template>
+      <tlt-form-model-item label="Relay version" help="Build version reported by the currently running relay process, read from its status endpoint. This is the running binary, which can differ from the installed package or this WebUI. Shows Unknown when the relay is stopped or does not report a version.">
+        <tlt-dummy-value :value="relayVersion" />
+      </tlt-form-model-item>
+      <tlt-form-model-item label="WebUI version" help="Version of this administration page's loaded build, derived from the package version at build time. It identifies the frontend you are viewing and may differ from the running relay version.">
+        <tlt-dummy-value :value="uiVersion" />
+      </tlt-form-model-item>
       <tlt-form-model-item label="Actions" help="Refresh the displayed status without restarting the relay or changing its configuration.">
         <tlt-button type="secondary" @click="loadStatus">Refresh</tlt-button>
       </tlt-form-model-item>
@@ -111,12 +117,20 @@ function configResource(res) {
 // normalized.
 const STATS_MESSAGE = "Stats interval requires a unit: use 300s, 5m or 1h; use 0 to disable summaries.";
 
+// WebUI build version, injected at build time from package.json by
+// vite.config.js (define __UI_VERSION__). Never hardcode a version literal here;
+// "typeof" keeps the reference safe when the token was not replaced (isolated
+// unit tests run the script without the build define).
+const UI_VERSION = typeof __UI_VERSION__ !== "undefined" ? __UI_VERSION__ : "unknown";
+
 export default {
   data() {
     return {
       status: null,
       error: "",
       message: "",
+      // Build-derived (package.json via the Vite define); never a literal.
+      uiVersion: UI_VERSION,
       configId: "",
       filterOptions: [["query", "Queries only"], ["all", "All traffic"]],
       interfaces: [],
@@ -133,6 +147,12 @@ export default {
     };
   },
   computed: {
+    // Version of the *running* relay, reported by its status endpoint. Unknown
+    // when stopped, missing (older relay) or unreported; never invented.
+    relayVersion() {
+      const version = this.status ? this.status.relay_version : "";
+      return version && version !== "-" ? version : "Unknown";
+    },
     interfaceOptions() {
       const options = this.interfaces.map(item => [item.name, `${item.name} (${item.address})`]);
       // Preserve a saved interface that disappeared; never silently select another.
@@ -211,6 +231,7 @@ export default {
           return;
         }
         this.status = {
+          relay_version: pick(res, "relay_version") || "",
           lan_if: pick(res, "lan_if") || "-",
           lan_ip: pick(res, "lan_ip") || "-",
           peer: pick(res, "peer") || "-",

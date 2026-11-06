@@ -2,7 +2,7 @@
   "services/mdns-vpn-bridge": {
     "title": "mDNS VPN Bridge",
     "index": 70,
-    "view": "services/MdnsVpnBridge_c707c3",
+    "view": "services/MdnsVpnBridge_c20e7c",
     "acls": ["services/mdns-vpn-bridge"]
   }
 }

@@ -16,7 +16,7 @@ import tarfile
 HERE = pathlib.Path(__file__).resolve().parent
 PROJECT_ROOT = HERE.parent
 CONTROL_DIR = HERE / "control"
-VERSION = "0.5.0"
+VERSION = "0.5.1"
 ARCH = "cortexa7hf-neon-vfpv4"
 MAINTAINER_SCRIPTS = ("postinst", "postrm", "prerm")
 
@@ -65,7 +65,7 @@ def build(assets, output):
     if missing:
         raise ValueError(f"missing package files: {missing}")
     control = (f"Package: mdns-vpn-bridge-rutos-ui\nVersion: {VERSION}\n"
-               f"Architecture: {ARCH}\nDepends: mdns-vpn-bridge (>= 0.5.0)\n"
+               f"Architecture: {ARCH}\nDepends: mdns-vpn-bridge (>= 0.5.1)\n"
                "Conflicts: mdns-vpn-bridge-admin\nReplaces: mdns-vpn-bridge-admin\n"
                "Firmware: RUTX_R_00.07.25.3\nRouter: RUTX\nAppName: mdns-vpn-bridge-rutos-ui\n"
                "tlt_name: mDNS VPN Bridge WebUI\n"
